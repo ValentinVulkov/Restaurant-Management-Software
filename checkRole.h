@@ -1,10 +1,16 @@
 
 #pragma once
 #include <iostream>
+#include <fstream>;
 
 const int MAX_SIZE = 1024;
 
 void showAllActionsServer();
+void showMenu();
+
+void placeOrder();
+void cancelOrder();
+void seePreviousOrders();
 
 int checkRole()
 {
@@ -70,7 +76,6 @@ int checkRole()
 }
 
 
-
 void serverOptions()
 {
     int chosenOption = 0;   
@@ -79,8 +84,10 @@ void serverOptions()
     switch (chosenOption)
     {
     case 1: showAllActionsServer(); break;
-    case 2: showMenu();
-
+    case 2: showMenu(); break;
+    case 3: placeOrder(); break;
+    case 4: cancelOrder(); break;
+    case 5: seePreviousOrders(); break;
     }
 }
 
@@ -100,17 +107,174 @@ void showAllActionsServer()
 
 void showMenu()
 {
-    std::ifstream file("/mnt/data/updated_restaurant_menu.txt");  // Open the file
-    if (!file) 
-    {
-        std::cerr << "Error opening file.\n";
+   system("cls");  // Clear the console
+   std::fstream ofs;
+
+   ofs.open("restaurant_menu.txt", std::ios::in);
+   if (!ofs.is_open()) 
+   {
+       std::cerr << "Failed to open file for reading.\n";
+       return;
+   }
+  
+   char ch;
+   while (ofs.get(ch)) 
+   {
+       std::cout << ch;
+   }
+   ofs.close();
+   std::cout << "\n";
+   serverOptions();
+}
+
+bool compareStrings(const char* str1, const char* str2) {
+    while (*str1 != '\0' && *str2 != '\0') {
+        if (*str1 != *str2) {
+            return false;
+        }
+        str1++;
+        str2++;
+    }
+    return *str1 == '\0' && *str2 == '\0';
+}
+
+void placeOrder() {
+    std::ifstream menuFile("restaurant_menu.txt", std::ios::in);
+    if (!menuFile) {
+        std::cout << "Error: cannot open the Menu file!" << std::endl;
         return;
     }
 
-    std::string line;
-    while (std::getline(file, line)) {  // Read each line from the file
-        std::cout << line << "\n";  // Print each menu item
+    char menuItem[256];
+    char orderItem[256];
+    bool itemFound = false;
+
+    std::cin.ignore(); // Clear the leftover newline from previous input.
+    std::cout << "Enter the name of the item: ";
+    std::cin.getline(orderItem, 256);
+
+    while (menuFile.getline(menuItem, 256)) { // Check if the item is on the menu
+        if (compareStrings(menuItem, orderItem)) {
+            itemFound = true;
+            break;
+        }
+    }
+    menuFile.close();
+
+    if (!itemFound) {
+        std::cout << "This item cannot be found on the menu!" << std::endl;
+        return;
     }
 
-    file.close();  // Close the file
+    int quantity = 0;
+    std::cout << "Enter quantity: "; // If the item is found, the quantity of it is asked.
+    std::cin >> quantity;
+
+    std::ofstream orderFile("orders.txt", std::ios::app); // Writing the data to a separate file only for orders on the current day.
+    if (!orderFile) {
+        std::cout << "Error: cannot open the Orders file!" << std::endl;
+        return;
+    }
+
+    orderFile << orderItem << " " << quantity << std::endl;
+    orderFile.close();
+
+    std::cout << "The order was successful!" << std::endl;
+    serverOptions();
+}
+
+void cancelOrder() {
+    std::ifstream orderFile("orders.txt", std::ios::in);
+    if (!orderFile) {
+        std::cerr << "Error: cannot find the file for orders!" << std::endl;
+        return;
+    }
+
+   
+    struct Order {
+        char name[256];
+        int quantity;
+    };
+
+    Order orders[100]; 
+    int orderCount = 0;
+
+    while (orderFile >> orders[orderCount].name >> orders[orderCount].quantity) {
+        orderFile.ignore(); 
+        orderCount++;
+    }
+    orderFile.close();
+
+  
+    char cancelItem[256];
+    std::cin.ignore(); // Clear the input buffer
+    std::cout << "Enter the name of the item to cancel: ";
+    std::cin.getline(cancelItem, 256);
+
+   
+    bool itemFound = false;
+    for (int i = 0; i < orderCount; i++) {
+        if (compareStrings(orders[i].name, cancelItem)) {
+            itemFound = true;
+
+            
+            int cancelQuantity;
+            std::cout << "Enter the quantity to cancel: ";
+            std::cin >> cancelQuantity;
+
+            if (cancelQuantity > orders[i].quantity) {
+                std::cerr << "Error: Cannot cancel more than the existing quantity!" << std::endl;
+                return;
+            }
+
+         
+            if (cancelQuantity == orders[i].quantity) {
+                orders[i].quantity = 0; // 
+            }
+            else {
+                orders[i].quantity -= cancelQuantity;
+            }
+            break;
+        }
+    }
+
+    if (!itemFound) {
+        std::cerr << "Error: Item not found in the orders!" << std::endl;
+        return;
+    }
+
+    
+    std::ofstream outFile("orders.txt", std::ios::out | std::ios::trunc);               // Rewrite the file with updated orders
+    if (!outFile) {
+        std::cerr << "Error: Cannot open the Orders file for writing!" << std::endl;
+        return;
+    }
+
+    for (int i = 0; i < orderCount; i++) {
+        if (orders[i].quantity > 0) { // Only write non-deleted orders
+            outFile << orders[i].name << " " << orders[i].quantity << std::endl;
+        }
+    }
+    outFile.close();
+
+    std::cout << "The order was successfully canceled!" << std::endl;
+}
+
+
+void seePreviousOrders() {
+    std::ifstream orderFile("orders.txt", std::ios::in);
+    if (!orderFile) {
+        std::cerr << "Error: cannot find the file for orders!" << std::endl;
+        return;
+    }
+
+    char orderLine[256];
+    std::cout << "Previous orders:\n";
+
+    while (orderFile.getline(orderLine, 256)) {
+        std::cout << orderLine << std::endl;
+    }
+
+    orderFile.close();
+    serverOptions();
 }
