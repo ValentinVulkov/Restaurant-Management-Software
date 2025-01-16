@@ -1,78 +1,91 @@
-
+﻿
 #pragma once
 #include <iostream>
 #include <fstream>;
 
 const int MAX_SIZE = 1024;
+const char* findLastDate(const char* filename);
+const char* CURRENT_DATE = findLastDate("dates.txt");
+
+
+
+bool compareStrings(const char* str1, const char* str2) {
+    while (*str1 != '\0' && *str2 != '\0') {
+        if (*str1 != *str2) {
+            return false;
+        }
+        str1++;
+        str2++;
+    }
+    return *str1 == '\0' && *str2 == '\0';
+}
+void myStrcpy(char* source, char* dest)
+{
+    if (!source || !dest)
+        return;
+    while (*source)
+    {
+        *dest = *source;
+        dest++;
+        source++;
+    }
+    *dest = '\0';
+}
+
+struct Order {
+    char* item;
+    int quantity;
+};
 
 void showAllActionsServer();
-void showMenu();
+void showAllActionsManager();
 
+void showMenu();
 void placeOrder();
 void cancelOrder();
+
+
+
 void seePreviousOrders();
+void seePreviousOrdersSorted();
+double getPrice(const char* itemName);
+void turnoverFromDate(const char* filename);
+void addMenuItem(const char* filename);
+void removeMenuItem(const char* filename);
+
+void showMenuRemaining();
+
+void showWarehouseStock();
+void removeFromWarehouseStock();
+void addProductToWarehouse();
+void turnoverToday(const char* filename);
+void addNextDate(const char* CURRENT_DATE);
+
 
 int checkRole()
 {
-    char role[MAX_SIZE] = {};
-    char c;
-    int i = 0;
-    std::cout << "Please enter your role: ";
-    while (std::cin.get(c) && c != '\n') { // Input the array
-        role[i++] = c;
-    }
-    role[i] = '\0';
+    int role = 0;
+    std::cout << CURRENT_DATE << "\n";
+    std::cout << "Please enter your role: " << "\n";
+    std::cout << "             1. Server" << "\n";
+    std::cout << "             2. Manager" << "\n";
 
-    const char server[] = "Server";
-    const char manager[] = "Manager";
+    std::cin >> role;
 
-    bool isServer = true;
-    bool isManager = true;
+    system("cls");
 
-    // Check for "Server"
-    i = 0;
-    while (server[i]) 
-    {
-        if ((i == 0) && (server[i] != role[i]) && (server[i] != role[i] + ('A' - 'a')))
-        {
-            isServer = false;
-        }
-        else if ((i > 0) && (server[i] != role[i])) {
-            isServer = false;
-        }
-        i++;
-    }
-    if (isServer)
-    {
-        system("cls");  // Clear the console
-        std::cout << "Greetins, Server!" << "\n";
+    if (role == 1) {
+        std::cout << "Greetings, Server!" << "\n";
         return 1;
     }
-        
-
-    // Check for "Manager"
-    i = 0;
-    while (manager[i]) 
-    {
-        if ((i == 0) && (manager[i] != role[i]) && (manager[i] != role[i] + ('A' - 'a')))
-        {
-            isManager = false;
-        }
-        else if ((i > 0) && (manager[i] != role[i])) {
-            isManager = false;
-        }
-        i++;
-    }
-
-    if (isManager)
-    {
-        system("cls");  // Clear the console
-        std::cout << "Greetins, Manager!" << "\n";
+    else if (role == 2) {
+        std::cout << "Greetings, Manager!" << "\n";
         return 2;
     }
-
-
-    return -1;
+    else {
+        std::cout << "Invalid role! Please enter 1 for Server or 2 for Manager.\n";
+        return -1;
+    }
 }
 
 
@@ -88,8 +101,39 @@ void serverOptions()
     case 3: placeOrder(); break;
     case 4: cancelOrder(); break;
     case 5: seePreviousOrders(); break;
+    case 6: seePreviousOrdersSorted(); break;
+    case 7: turnoverToday("dates.txt"); break;
+    default: std::cout << "Not an avalable option."; serverOptions(); break;
     }
 }
+
+void managerOptions()
+{
+    int chosenOption = 0;
+    std::cout << "Please choose which action you'd like to use, to see all avalable actions type 1:" << "\n";
+    std::cin >> chosenOption;
+    switch (chosenOption)
+    {
+    case 1: showAllActionsManager(); break;
+    case 2: showMenu(); break;
+    case 3: placeOrder(); break;
+    case 4: cancelOrder(); break;
+    case 5: seePreviousOrdersSorted(); break;
+    case 6: seePreviousOrders(); break;
+    case 7: showMenuRemaining(); break;
+    case 8: showWarehouseStock(); break;
+    case 9: removeFromWarehouseStock(); break;
+    case 10: addProductToWarehouse(); break;
+    case 11: turnoverToday("dates.txt"); break;
+    case 12: addNextDate(CURRENT_DATE); break;
+    case 13: turnoverFromDate("dates.txt"); break;
+    case 14: addMenuItem("dates.txt"); break;
+    case 15: removeMenuItem("dates.txt"); break;
+    default: std::cout << "Not an avalable option."; managerOptions(); break;
+    }
+}
+
+
 
 void showAllActionsServer()
 {
@@ -105,15 +149,40 @@ void showAllActionsServer()
     serverOptions();
 }
 
+void showAllActionsManager()
+{
+    system("cls");
+    std::cout << "1) See all avalable actions. " << "\n";
+    std::cout << "2) See the menu. " << "\n";
+    std::cout << "3) Place an order. " << "\n";
+    std::cout << "4) Cancel an order. " << "\n";
+    std::cout << "5) Look at previous orders. " << "\n";
+    std::cout << "6) Look at previous orders in an alphabetical order, as well as the number of items ordered. " << "\n";
+    std::cout << "7) Show everything menu item remaining." << "\n";
+    std::cout << "8) Show everything contained in the warehouse." << "\n";
+    std::cout << "9) Remove an item from the warehouse." << "\n";
+    std::cout << "10) Add a product to the warehouse." << "\n";
+    std::cout << "11) Show turnover for the day." << "\n";
+    std::cout << "12) End the day." << "\n";
+    std::cout << "13) Show the turnover from a certain date forward." << "\n";
+    std::cout << "14) Add an item to the menu." << "\n";
+    std::cout << "15) Remove an item from the menu." << "\n";
+
+
+
+    std::cout << "\n";
+    managerOptions();
+}
+
 void showMenu()
 {
    system("cls");  // Clear the console
    std::fstream ofs;
 
-   ofs.open("restaurant_menu.txt", std::ios::in);
+   ofs.open("menu_prices.txt", std::ios::in);
    if (!ofs.is_open()) 
    {
-       std::cerr << "Failed to open file for reading.\n";
+       std::cout << "Failed to open file for reading.\n";
        return;
    }
   
@@ -127,144 +196,212 @@ void showMenu()
    serverOptions();
 }
 
-bool compareStrings(const char* str1, const char* str2) {
-    while (*str1 != '\0' && *str2 != '\0') {
-        if (*str1 != *str2) {
-            return false;
-        }
-        str1++;
-        str2++;
-    }
-    return *str1 == '\0' && *str2 == '\0';
-}
-
-void placeOrder() {
-    std::ifstream menuFile("restaurant_menu.txt", std::ios::in);
-    if (!menuFile) {
-        std::cout << "Error: cannot open the Menu file!" << std::endl;
-        return;
+double getPrice(const char* itemName) {
+    std::ifstream priceFile("menu_prices.txt", std::ios::in);
+    if (!priceFile) {
+        std::cout << "Error: cannot open the price file!" << std::endl;
+        return -1.0;
     }
 
     char menuItem[256];
-    char orderItem[256];
-    bool itemFound = false;
+    while (priceFile.getline(menuItem, 256)) {
+        char itemNameInFile[256];
+        int i = 0, j = 0;
 
-    std::cin.ignore(); // Clear the leftover newline from previous input.
-    std::cout << "Enter the name of the item: ";
-    std::cin.getline(orderItem, 256);
+        // Extract item name
+        while (menuItem[i] != '\0' && menuItem[i] != ' ') {
+            itemNameInFile[j++] = menuItem[i++];
+        }
+        itemNameInFile[j] = '\0';
 
-    while (menuFile.getline(menuItem, 256)) { // Check if the item is on the menu
-        if (compareStrings(menuItem, orderItem)) {
-            itemFound = true;
+        if (compareStrings(itemName, itemNameInFile)) {
+            // Skip spaces to find the price
+            while (menuItem[i] == ' ') {
+                i++;
+            }
+
+            double price = 0.0;
+            bool decimal = false;
+            double factor = 0.1;
+
+            while (menuItem[i] != '\0') {
+                if (menuItem[i] == '.') {
+                    decimal = true;
+                }
+                else if (menuItem[i] >= '0' && menuItem[i] <= '9') {
+                    if (!decimal) {
+                        price = price * 10 + (menuItem[i] - '0');
+                    }
+                    else {
+                        price += (menuItem[i] - '0') * factor;
+                        factor /= 10;
+                    }
+                }
+                i++;
+            }
+
+            priceFile.close();
+            return price;
+        }
+    }
+
+    priceFile.close();
+    return -1.0; // Return -1 if the item is not found
+}
+
+void placeOrder() {
+    char menuItem[100], searchItem[100];
+    bool found = false;
+    int quantity;
+
+    // Отваряне на файла с менюто
+    std::ifstream menuFile("menu_prices.txt");
+    if (!menuFile) {
+        std::cout << "Error: cannot open the menu file.\n";
+        return;
+    }
+
+    // Изчистване на входния буфер
+    std::cin.ignore();
+
+    // Пита за предмет
+    std::cout << "Please enter the name of the item you wish to order: ";
+    std::cin.getline(searchItem, 100);
+
+    // Проверка дали предметът съществува в менюто
+    while (menuFile >> menuItem) {
+        // Сравнение на имената
+        int i = 0;
+        found = true;
+        while (menuItem[i] != '\0' && searchItem[i] != '\0') {
+            if (menuItem[i] != searchItem[i]) {
+                found = false;
+                break;
+            }
+            i++;
+        }
+
+        if (found && menuItem[i] == '\0' && searchItem[i] == '\0') {
             break;
+        }
+        else {
+            found = false;
         }
     }
     menuFile.close();
 
-    if (!itemFound) {
-        std::cout << "This item cannot be found on the menu!" << std::endl;
-        return;
+    // Ако предметът е намерен, пита за количество и записва в orders.txt
+    if (found) {
+        std::cout << "The item \"" << searchItem << "\" is available.\n";
+        std::cout << "Enter quantity: ";
+        std::cin >> quantity;
+
+        std::ofstream ordersFile("orders.txt", std::ios::app);
+        if (!ordersFile) {
+            std::cout << "Error: cannot open the file with orders!\n";
+            return;
+        }
+        ordersFile << searchItem << " " << quantity << "\n";
+        ordersFile.close();
+
+        std::cout << "The order has been successfully added.\n";
     }
-
-    int quantity = 0;
-    std::cout << "Enter quantity: "; // If the item is found, the quantity of it is asked.
-    std::cin >> quantity;
-
-    std::ofstream orderFile("orders.txt", std::ios::app); // Writing the data to a separate file only for orders on the current day.
-    if (!orderFile) {
-        std::cout << "Error: cannot open the Orders file!" << std::endl;
-        return;
+    else {
+        std::cout << "The item \"" << searchItem << "\" is not available in the menu.\n";
     }
-
-    orderFile << orderItem << " " << quantity << std::endl;
-    orderFile.close();
-
-    std::cout << "The order was successful!" << std::endl;
-    serverOptions();
 }
 
 void cancelOrder() {
-    std::ifstream orderFile("orders.txt", std::ios::in);
-    if (!orderFile) {
-        std::cerr << "Error: cannot find the file for orders!" << std::endl;
+    char menuItem[100], searchItem[100];
+    bool found = false;
+
+    // Open the orders file
+    std::ifstream ordersFile("orders.txt");
+    if (!ordersFile) {
+        std::cout << "Error: cannot open the orders file.\n";
         return;
     }
 
-   
-    struct Order {
-        char name[256];
-        int quantity;
-    };
-
-    Order orders[100]; 
+    // Read all orders into an array
+    char orders[100][100];
     int orderCount = 0;
-
-    while (orderFile >> orders[orderCount].name >> orders[orderCount].quantity) {
-        orderFile.ignore(); 
+    while (ordersFile.getline(orders[orderCount], 100) && orderCount < 100) {
         orderCount++;
     }
-    orderFile.close();
+    ordersFile.close();
 
-  
-    char cancelItem[256];
-    std::cin.ignore(); // Clear the input buffer
-    std::cout << "Enter the name of the item to cancel: ";
-    std::cin.getline(cancelItem, 256);
+    // Ask for the item name to cancel
+    std::cout << "Please enter the name of the item you wish to cancel: ";
+    std::cin.ignore(); // Ensure no leftover input from previous reads
+    std::cin.getline(searchItem, 100); // Read item name
 
-   
-    bool itemFound = false;
+    // Ensure that the input isn't empty
+    if (searchItem[0] == '\0') {
+        std::cout << "No item name was entered. Exiting...\n";
+        return;
+    }
+
+    // Look for the item in the orders
     for (int i = 0; i < orderCount; i++) {
-        if (compareStrings(orders[i].name, cancelItem)) {
-            itemFound = true;
-
-            
-            int cancelQuantity;
-            std::cout << "Enter the quantity to cancel: ";
-            std::cin >> cancelQuantity;
-
-            if (cancelQuantity > orders[i].quantity) {
-                std::cerr << "Error: Cannot cancel more than the existing quantity!" << std::endl;
-                return;
+        found = true;
+        int j = 0;
+        // Compare the item names
+        while (orders[i][j] != ' ' && searchItem[j] != '\0') {
+            if (orders[i][j] != searchItem[j]) {
+                found = false;
+                break;
             }
+            j++;
+        }
 
-         
-            if (cancelQuantity == orders[i].quantity) {
-                orders[i].quantity = 0; // 
-            }
-            else {
-                orders[i].quantity -= cancelQuantity;
+        // If the item matches
+        if (found && orders[i][j] == ' ' && searchItem[j] == '\0') {
+            // Show the found order
+            std::cout << "Found the order: " << orders[i] << std::endl;
+            std::cout << "Are you sure you want to cancel this order? (y/n): ";
+            char choice;
+            std::cin >> choice;
+            std::cin.ignore();  // Clear the newline character from the input buffer
+
+            if (choice == 'y' || choice == 'Y') {
+                // Remove the order from the array
+                for (int j = i; j < orderCount - 1; j++) {
+                    for (int k = 0; k < 100; k++) {
+                        orders[j][k] = orders[j + 1][k];
+                    }
+                }
+                orderCount--; // Decrease the order count
+                std::cout << "The order has been successfully canceled.\n";
             }
             break;
         }
     }
 
-    if (!itemFound) {
-        std::cerr << "Error: Item not found in the orders!" << std::endl;
+    // If the item was not found
+    if (!found) {
+        std::cout << "The item \"" << searchItem << "\" was not found in your orders.\n";
         return;
     }
 
-    
-    std::ofstream outFile("orders.txt", std::ios::out | std::ios::trunc);               // Rewrite the file with updated orders
-    if (!outFile) {
-        std::cerr << "Error: Cannot open the Orders file for writing!" << std::endl;
+    // Rewrite the orders without the canceled one
+    std::ofstream updatedOrdersFile("orders.txt", std::ios::trunc);
+    if (!updatedOrdersFile) {
+        std::cout << "Error: cannot open the orders file for writing.\n";
         return;
     }
 
+    // Write the remaining orders back to the file
     for (int i = 0; i < orderCount; i++) {
-        if (orders[i].quantity > 0) { // Only write non-deleted orders
-            outFile << orders[i].name << " " << orders[i].quantity << std::endl;
-        }
+        updatedOrdersFile << orders[i] << std::endl;
     }
-    outFile.close();
-
-    std::cout << "The order was successfully canceled!" << std::endl;
+    updatedOrdersFile.close();
 }
 
-
 void seePreviousOrders() {
+    system("cls");
     std::ifstream orderFile("orders.txt", std::ios::in);
     if (!orderFile) {
-        std::cerr << "Error: cannot find the file for orders!" << std::endl;
+        std::cout << "Error: cannot find the file for orders!" << std::endl;
         return;
     }
 
@@ -276,5 +413,537 @@ void seePreviousOrders() {
     }
 
     orderFile.close();
+    std::cout << "\n";
     serverOptions();
 }
+
+void seePreviousOrdersSorted() {
+    system("cls");
+    std::ifstream orderFile("orders.txt", std::ios::in);
+    if (!orderFile) {
+        std::cout << "Error: cannot find the file for orders!" << std::endl;
+        return;
+    }
+
+    char orderLine[256];
+    std::string orders[100];  // 100 orders max
+    int orderCount = 0;
+
+    while (orderFile.getline(orderLine, 256) && orderCount < 100) {
+        orders[orderCount] = orderLine;
+        orderCount++;
+    }
+
+    orderFile.close();
+
+    // Bubble Sort
+    for (int i = 0; i < orderCount - 1; i++) {
+        for (int j = 0; j < orderCount - i - 1; j++) {
+            if (orders[j] > orders[j + 1]) {
+                
+                std::string temp = orders[j];
+                orders[j] = orders[j + 1];
+                orders[j + 1] = temp;
+            }
+        }
+    }
+
+
+    std::cout << "Previous orders (sorted):\n";
+    for (int i = 0; i < orderCount; i++) {
+        std::cout << orders[i] << std::endl;
+    }
+
+    std::cout << "\n";
+   
+}
+
+void addMenuItem(const char* filename) {
+    char itemName[256];
+    double price;
+
+    // Input for the new menu item
+    std::cout << "Enter the name of the menu item: ";
+    std::cin.ignore(); // Clear input buffer
+    std::cin.getline(itemName, sizeof(itemName));
+
+    std::cout << "Enter the price of the menu item: ";
+    std::cin >> price;
+
+    if (price < 0) {
+        std::cout << "Error: Price cannot be negative.\n";
+        return;
+    }
+
+    // Append to the file
+    std::ofstream menuFile(filename, std::ios::app);
+    if (!menuFile) {
+        std::cout << "Error: Cannot open the menu file!" << std::endl;
+        return;
+    }
+
+    menuFile << itemName << " " << price << "\n";
+    menuFile.close();
+
+    std::cout << "Menu item added successfully!\n";
+}
+
+
+void removeMenuItem(const char* filename) {
+    char itemNameToRemove[256];
+
+    // Input for the item to remove
+    std::cout << "Enter the name of the menu item to remove: ";
+    std::cin.ignore(); // Clear input buffer
+    std::cin.getline(itemNameToRemove, sizeof(itemNameToRemove));
+
+    std::ifstream menuFile(filename, std::ios::in);
+    if (!menuFile) {
+        std::cout << "Error: Cannot open the menu file!" << std::endl;
+        return;
+    }
+
+    std::ofstream tempFile("temp_menu.txt", std::ios::out);
+    if (!tempFile) {
+        std::cout << "Error: Cannot create a temporary file!" << std::endl;
+        menuFile.close();
+        return;
+    }
+
+    char line[256];
+    bool itemFound = false;
+
+    // Process the file line by line
+    while (menuFile.getline(line, sizeof(line))) {
+        char itemName[256];
+        int i = 0;
+
+        // Extract the item name from the line
+        while (line[i] != '\0' && line[i] != ' ') {
+            itemName[i] = line[i];
+            i++;
+        }
+        itemName[i] = '\0';
+
+        // Compare the item name with the one to remove
+        if (strcmp(itemName, itemNameToRemove) == 0) {
+            itemFound = true; // Mark item as found
+        }
+        else {
+            tempFile << line << "\n"; // Copy other lines to the temp file
+        }
+    }
+
+    menuFile.close();
+    tempFile.close();
+
+    if (itemFound) {
+        // Replace the original file with the temp file
+        remove(filename);
+        rename("temp_menu.txt", filename);
+        std::cout << "Menu item removed successfully!\n";
+    }
+    else {
+        // Cleanup temp file and notify the user
+        remove("temp_menu.txt");
+        std::cout << "Menu item not found!\n";
+    }
+}
+
+
+void showWarehouseStock()
+{
+    system("cls");  // Clear the console
+    std::fstream ofs;
+
+    ofs.open("warehouse_products.txt", std::ios::in);
+    if (!ofs.is_open())
+    {
+        std::cout << "Failed to open file for reading.\n";
+        return;
+    }
+
+    char ch;
+    while (ofs.get(ch))
+    {
+        std::cout << ch;
+    }
+    ofs.close();
+    std::cout << "\n" << "\n";
+    serverOptions();
+}
+
+void addProductToWarehouse() {
+    system("cls");  // Clear the console
+    std::cout << "Adding a new product to the warehouse." << std::endl;
+
+
+    char productName[256];
+    std::cout << "Enter the name of the product: ";
+    std::cin.ignore();
+    std::cin.getline(productName, 256);
+
+
+    int quantity = 0;
+    std::cout << "Enter the quantity (in grams): ";
+    std::cin >> quantity;
+
+
+    std::ofstream warehouseFile("warehouse_products.txt", std::ios::app);
+    if (!warehouseFile) {
+        std::cerr << "Error: cannot open the warehouse products file for writing!" << std::endl;
+        return;
+    }
+
+
+    warehouseFile << productName << " " << quantity << std::endl;
+
+    warehouseFile.close();
+
+    std::cout << "The product was successfully added!" << std::endl;
+
+    serverOptions();
+}
+
+void removeFromWarehouseStock() {
+    system("cls");  
+
+    std::ifstream warehouseFile("warehouse_products.txt", std::ios::in);
+    if (!warehouseFile.is_open()) {
+        std::cout << "Error: cannot open warehouse_products.txt for reading!" << std::endl;
+        return;
+    }
+
+    char products[100][50]; // Product names (up to 100 products, each name up to 50 characters)
+    int quantities[100];    // Quantities of the products
+    int productCount = 0;
+
+
+    while (warehouseFile >> products[productCount] >> quantities[productCount]) {
+        productCount++;
+    }
+
+    warehouseFile.close();
+
+    char productName[50];
+    int quantityToRemove;
+
+    std::cin.ignore(); 
+    std::cout << "Enter the product name to remove quantity from: ";
+    std::cin.getline(productName, 50);
+
+    int foundIndex = -1;
+    for (int i = 0; i < productCount; ++i) {
+        if (compareStrings(products[i], productName)) {
+            foundIndex = i;
+            break;
+        }
+    }
+
+    if (foundIndex == -1) {
+        std::cout << "Error: Product not found in the warehouse!" << std::endl;
+        return;
+    }
+
+
+    std::cout << "Enter the quantity to remove: ";
+    std::cin >> quantityToRemove;
+
+    if (quantityToRemove <= 0 || quantityToRemove > quantities[foundIndex]) {
+        std::cout << "Error: Invalid quantity to remove!" << std::endl;
+        return;
+    }
+
+
+    quantities[foundIndex] -= quantityToRemove;
+    std::cout << "Removed " << quantityToRemove << " from " << products[foundIndex]
+        << ". Remaining quantity: " << quantities[foundIndex] << std::endl;
+
+    std::ofstream updatedWarehouseFile("warehouse_products.txt", std::ios::out);
+    if (!updatedWarehouseFile.is_open()) {
+        std::cout << "Error: cannot open warehouse_products.txt for writing!" << std::endl;
+        return;
+    }
+
+    for (int i = 0; i < productCount; ++i) {
+        if (quantities[i] > 0) {
+            updatedWarehouseFile << products[i] << " " << quantities[i] << std::endl;
+        }
+    }
+
+    updatedWarehouseFile.close();
+
+    std::cout << "Warehouse stock updated successfully!" << std::endl;
+    managerOptions();
+}
+
+void showMenuRemaining()
+{
+    system("cls");  // Clear the console
+    std::fstream ofs;
+
+    ofs.open("menu_remaining.txt", std::ios::in);
+    if (!ofs.is_open())
+    {
+        std::cout << "Failed to open file for reading.\n";
+        return;
+    }
+
+    char ch;
+    while (ofs.get(ch))
+    {
+        std::cout << ch;
+    }
+    ofs.close();
+    std::cout << "\n";
+    serverOptions();
+}
+
+const char* findLastDate(const char* filename) {
+    static char date[11];
+    int i = 0;
+
+    std::fstream file(filename, std::ios::in);
+    if (!file) {
+        std::cout << "Cannot open the file." << std::endl;
+        return nullptr;
+    }
+
+    char ch;
+    while (file.get(ch)) {
+        if (ch == '\n') {
+            i = 0;
+        }
+        else if (i < 10) {
+            date[i++] = ch;
+        }
+    }
+    date[10] = '\0';
+
+    file.close();
+    return date;
+}
+
+bool isLeapYear(int year) {
+    return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+}
+
+int daysInMonth(int month, int year) {
+    switch (month) {
+    case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+        return 31;
+    case 4: case 6: case 9: case 11:
+        return 30;
+    case 2:
+        return isLeapYear(year) ? 29 : 28;
+    default:
+        return 0;
+    }
+}
+
+int myStoi(const char* str) {
+    int number = 0;
+    int i = 0;
+
+    // Loop through the string and convert digits to integer, ignoring non-numeric characters
+    while (str[i] != '\0' && str[i] >= '0' && str[i] <= '9') {
+        number = number * 10 + (str[i] - '0');
+        i++;
+    }
+
+    return number;
+}
+
+void myStrcpy(char* dest, const char* source) {
+    while (*source) {
+        *dest = *source;
+        dest++;
+        source++;
+    }
+    *dest = '\0';
+}
+
+void addNextDate(const char* CURRENT_DATE) {
+    const char* date = CURRENT_DATE;
+    int day = myStoi(date);                    // Extract day
+    int month = myStoi(date + 3);              // Extract month (skipping first 3 chars)
+    int year = myStoi(date + 6);               // Extract year (skipping first 6 chars)
+
+    // Increment the day
+    day++;
+    if (day > daysInMonth(month, year)) {      // If day exceeds the number of days in the month
+        day = 1;                               // Reset day to 1
+        month++;                               // Increment the month
+        if (month > 12) {                      // If month exceeds 12, reset month to 1 and increment year
+            month = 1;
+            year++;
+        }
+    }
+
+    // Construct the next date in the format dd/mm/yyyy
+    char nextDate[25];  // Increased the buffer size to 25 for date + time handling
+    nextDate[0] = (day / 10) + '0';          // Tens digit of the day
+    nextDate[1] = (day % 10) + '0';          // Ones digit of the day
+    nextDate[2] = '/';
+    nextDate[3] = (month / 10) + '0';        // Tens digit of the month
+    nextDate[4] = (month % 10) + '0';        // Ones digit of the month
+    nextDate[5] = '/';
+    nextDate[6] = (year / 1000) + '0';       // Thousands digit of the year
+    nextDate[7] = ((year / 100) % 10) + '0'; // Hundreds digit of the year
+    nextDate[8] = ((year / 10) % 10) + '0';  // Tens digit of the year
+    nextDate[9] = (year % 10) + '0';         // Ones digit of the year
+    nextDate[10] = ' ';                      // Space between date and time
+    nextDate[11] = '\0';                     // Null terminator (for string termination)
+
+    // Time placeholder (keep the same format as the original date)
+    const char* timePart = strchr(CURRENT_DATE, ' '); // Find the time part (first space)
+    if (timePart != nullptr) {
+        // Copy the time part to the next date string
+        myStrcpy(nextDate + 11, timePart + 1);  // Skip the space before the time part
+    }
+
+    // Open dates.txt to append the new date with time
+    std::ofstream file("dates.txt", std::ios::app);
+    if (!file.is_open()) {
+        std::cerr << "Error: Could not open dates.txt.\n";
+        return;
+    }
+
+    file << nextDate << "\n";  // Write the next date and time to the file
+    file.close();
+
+    // Clear the orders.txt file
+    std::ofstream ordersFile("orders.txt", std::ios::trunc);
+    if (!ordersFile.is_open()) {
+        std::cerr << "Error: Could not open orders.txt to clear it.\n";
+        return;
+    }
+
+    ordersFile.close();  // Simply closing it after truncating
+
+    std::cout << "Next date " << nextDate << " added to dates.txt.\n";
+    std::cout << "Orders have been cleared from orders.txt.\n";
+}
+
+void turnoverToday(const char* filename) {
+    std::ifstream file(filename, std::ios::in);
+    if (!file) {
+        std::cout << "Error: Cannot open the file!" << std::endl;
+        return;
+    }
+
+    char currentLine[256];
+    char lastLine[256];
+
+    // Read the file line by line and store the last read line
+    while (file.getline(currentLine, sizeof(currentLine))) {
+        for (int i = 0; i < 256; ++i) {
+            lastLine[i] = currentLine[i];
+            if (currentLine[i] == '\0') break;
+        }
+    }
+
+    file.close();
+
+    // Extract date and sum from the last line
+    char date[11];
+    double sum = 0.0;
+    int i = 0, j = 0;
+
+    // Extract date
+    while (lastLine[i] != ' ' && lastLine[i] != '\0') {
+        date[j++] = lastLine[i++];
+    }
+    date[j] = '\0';
+
+    // Skip spaces
+    while (lastLine[i] == ' ') {
+        i++;
+    }
+
+    // Extract sum
+    double factor = 1.0, fraction = 0.1;
+    bool decimal = false;
+    while (lastLine[i] != '\0') {
+        if (lastLine[i] == '.') {
+            decimal = true;
+        }
+        else if (lastLine[i] >= '0' && lastLine[i] <= '9') {
+            if (!decimal) {
+                sum = sum * 10 + (lastLine[i] - '0');
+            }
+            else {
+                sum += (lastLine[i] - '0') * fraction;
+                fraction *= 0.1;
+            }
+        }
+        i++;
+    }
+
+    // Print the results
+    std::cout << "Todays date: " << date << "\n";
+    std::cout << "Turnover: " << sum << "\n";
+}
+
+bool isDateGreaterOrEqual(const char* date1, const char* date2) {
+    // Compare year, month, and day separately
+    int year1 = (date1[6] - '0') * 1000 + (date1[7] - '0') * 100 + (date1[8] - '0') * 10 + (date1[9] - '0');
+    int year2 = (date2[6] - '0') * 1000 + (date2[7] - '0') * 100 + (date2[8] - '0') * 10 + (date2[9] - '0');
+
+    if (year1 > year2) return true;
+    if (year1 < year2) return false;
+
+    int month1 = (date1[3] - '0') * 10 + (date1[4] - '0');
+    int month2 = (date2[3] - '0') * 10 + (date2[4] - '0');
+
+    if (month1 > month2) return true;
+    if (month1 < month2) return false;
+
+    int day1 = (date1[0] - '0') * 10 + (date1[1] - '0');
+    int day2 = (date2[0] - '0') * 10 + (date2[1] - '0');
+
+    return day1 >= day2;
+}
+
+void turnoverFromDate(const char* filename) {
+    char fromDate[11];
+    std::cout << "Enter the starting date (dd/mm/yyyy): ";
+    std::cin.getline(fromDate, sizeof(fromDate));
+
+    std::ifstream file(filename, std::ios::in);
+    if (!file) {
+        std::cout << "Error: Cannot open the file!" << std::endl;
+        return;
+    }
+
+    char line[256];
+
+    std::cout << "Revenues from " << fromDate << " onward:\n";
+    bool found = false;
+
+    while (file.getline(line, sizeof(line))) {
+        char currentDate[11];
+        int i = 0;
+
+        // Extract the date from the current line
+        while (line[i] != ' ' && line[i] != '\0') {
+            currentDate[i] = line[i];
+            i++;
+        }
+        currentDate[i] = '\0';
+
+        if (isDateGreaterOrEqual(currentDate, fromDate)) {
+            found = true;
+            std::cout << line << "\n";
+        }
+    }
+
+    file.close();
+
+    if (!found) {
+        std::cout << "No revenues found from the given date onward.\n";
+    }
+}
+
+
+
