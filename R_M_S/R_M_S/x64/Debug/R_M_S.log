@@ -1,0 +1,7 @@
+﻿  main.cpp
+C:\Users\v4lka\source\repos\R_M_S\R_M_S\checkRole.h(4,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  (compiling source file 'main.cpp')
+  
+  strUtils.cpp
+  Generating Code...
+  R_M_S.vcxproj -> C:\Users\v4lka\source\repos\R_M_S\x64\Debug\R_M_S.exe

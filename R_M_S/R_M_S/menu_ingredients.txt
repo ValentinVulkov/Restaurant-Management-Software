@@ -1,0 +1,517 @@
+Shopska Salad
+Tomatoes 200
+Cucumbers 150
+Yellow_Cheese 100
+Onions 50
+Sunflower_oil 20
+Salt 5
+
+Tarator
+Yogurt 300
+Cucumbers 200
+Garlic 10
+Dill 5
+Sunflower_oil 10
+Salt 5
+
+Chicken Soup
+Chicken 200
+Carrots 100
+Potatoes 150
+Onions 50
+Garlic 10
+Salt 5
+
+Pork Schnitzel
+Pork 300
+Flour 50
+Eggs 2
+Sunflower_oil 50
+Salt 5
+
+Beef Stew
+Beef 400
+Potatoes 200
+Carrots 100
+Onions 50
+Garlic 10
+Salt 5
+
+Grilled Chicken Breast
+Chicken 300
+Sunflower_oil 20
+Salt 5
+Pepper 2
+
+Vegetable Stir-fry
+Carrots 100
+Cabbage 150
+Mushrooms 100
+Onions 50
+Sunflower_oil 20
+Salt 5
+
+Moussaka
+Potatoes 300
+Eggplant 200
+Ground_Beef 200
+Tomatoes 100
+Onions 50
+Cheese 100
+Salt 5
+
+Chicken Parmesan
+Chicken 300
+Tomatoes 100
+Cheese 100
+Flour 50
+Eggs 2
+Sunflower_oil 50
+Salt 5
+
+Stuffed Bell Peppers
+Bell_Peppers 4
+Rice 100
+Ground_Beef 200
+Tomatoes 100
+Onions 50
+Salt 5
+
+Fried Rice with Vegetables
+Rice 200
+Carrots 100
+Peas 100
+Eggs 2
+Sunflower_oil 20
+Salt 5
+
+Beef and Broccoli Stir-fry
+Beef 300
+Broccoli 200
+Onions 50
+Garlic 10
+Sunflower_oil 20
+Salt 5
+
+Chicken Shawarma
+Chicken 300
+Pita_Bread 2
+Tomatoes 100
+Cucumbers 100
+Garlic_Sauce 50
+Salt 5
+
+Grilled Salmon with Asparagus
+Salmon 300
+Asparagus 150
+Sunflower_oil 20
+Salt 5
+Lemon 1
+
+Fish and Chips
+Fish 300
+Potatoes 200
+Flour 50
+Sunflower_oil 100
+Salt 5
+
+Tomato Basil Soup
+Tomatoes 300
+Basil 10
+Onions 50
+Garlic 10
+Salt 5
+Cream 50
+
+Quinoa Salad
+Quinoa 200
+Tomatoes 100
+Cucumbers 100
+Onions 50
+Sunflower_oil 20
+Salt 5
+
+Eggplant Parmesan
+Eggplant 300
+Tomatoes 100
+Cheese 100
+Flour 50
+Eggs 2
+Sunflower_oil 50
+Salt 5
+
+Crispy Chicken Sandwich
+Chicken 300
+Bread 2
+Lettuce 50
+Tomatoes 50
+Mayonnaise 20
+Salt 5
+
+Pasta with Pesto Sauce
+Pasta 200
+Basil 50
+Pine_Nuts 20
+Cheese 50
+Garlic 10
+Sunflower_oil 20
+Salt 5
+
+Grilled Cheese Sandwich
+Bread 2
+Cheese 100
+Butter 20
+Salt 2
+
+Lamb Curry
+Lamb 400
+Onions 100
+Tomatoes 100
+Garlic 10
+Ginger 10
+Salt 5
+
+Chicken Wings with Blue Cheese Dip
+Chicken_Wings 500
+Blue_Cheese 100
+Mayonnaise 50
+Garlic 10
+Salt 5
+
+Pasta Puttanesca
+Pasta 200
+Tomatoes 100
+Olives 50
+Capers 20
+Garlic 10
+Sunflower_oil 20
+Salt 5
+
+Vegetarian Burger
+Vegetarian_Patty 1
+Bread 2
+Lettuce 50
+Tomatoes 50
+Mayonnaise 20
+Salt 5
+
+Roast Chicken with Potatoes
+Chicken 400
+Potatoes 300
+Onions 100
+Garlic 10
+Salt 5
+
+Caprese Salad
+Tomatoes 200
+Mozzarella 100
+Basil 10
+Sunflower_oil 20
+Salt 5
+
+Pulled Pork Sandwich
+Pork 300
+Bread 2
+Coleslaw 100
+Barbecue_Sauce 50
+Salt 5
+
+Cheese Quesadilla
+Tortilla 2
+Cheese 100
+Butter 20
+Salt 2
+
+Pulled Beef Tacos
+Beef 300
+Tortilla 2
+Lettuce 50
+Tomatoes 50
+Cheese 50
+Salt 5
+
+Chicken and Rice
+Chicken 300
+Rice 200
+Onions 50
+Garlic 10
+Salt 5
+
+Cheeseburger with Onion Rings
+Beef_Patty 1
+Bread 2
+Cheese 50
+Onion_Rings 100
+Mayonnaise 20
+Salt 5
+
+Pasta with Clams
+Pasta 200
+Clams 200
+Garlic 10
+White_Wine 50
+Sunflower_oil 20
+Salt 5
+
+Beef Empanadas
+Beef 300
+Flour 100
+Onions 50
+Eggs 1
+Salt 5
+
+Vegetable Soup
+Carrots 100
+Potatoes 150
+Cabbage 100
+Onions 50
+Garlic 10
+Salt 5
+
+Grilled Pork Tenderloin
+Pork 300
+Sunflower_oil 20
+Salt 5
+Pepper 2
+
+Pork Belly with Sauerkraut
+Pork_Belly 300
+Sauerkraut 200
+Onions 50
+Salt 5
+
+Sweet and Sour Pork
+Pork 300
+Pineapple 100
+Bell_Peppers 100
+Onions 50
+Sunflower_oil 20
+Salt 5
+
+Chicken Caesar Wrap
+Chicken 300
+Tortilla 2
+Lettuce 50
+Cheese 50
+Caesar_Dressing 20
+Salt 5
+
+Mushroom Risotto
+Rice 200
+Mushrooms 100
+Onions 50
+Cheese 50
+White_Wine 50
+Salt 5
+
+Barbecue Chicken Pizza
+Chicken 200
+Pizza_Dough 1
+Barbecue_Sauce 50
+Cheese 100
+Onions 50
+Salt 5
+
+Lobster Bisque
+Lobster 200
+Cream 100
+Onions 50
+Garlic 10
+Salt 5
+
+Steak Salad
+Steak 300
+Lettuce 100
+Tomatoes 100
+Onions 50
+Sunflower_oil 20
+Salt 5
+
+Sushi Platter
+Rice 200
+Fish 100
+Nori 10
+Cucumbers 50
+Avocado 50
+Salt 5
+
+Peking Duck
+Duck 400
+Pancakes 10
+Hoisin_Sauce 50
+Cucumbers 50
+Onions 50
+Salt 5
+
+Lobster Roll
+Lobster 200
+Bread 2
+Mayonnaise 50
+Lettuce 50
+Salt 5
+
+Gyro with Tzatziki Sauce
+Lamb 300
+Pita_Bread 2
+Tzatziki_Sauce 50
+Tomatoes 50
+Onions 50
+Salt 5
+
+Fried Calamari
+Calamari 300
+Flour 50
+Sunflower_oil 100
+Salt 5
+
+Fettuccine Carbonara
+Pasta 200
+Bacon 100
+Eggs 2
+Cheese 50
+Salt 5
+
+Beef Wellington
+Beef 400
+Puff_Pastry 100
+Mushrooms 100
+Onions 50
+Salt 5
+
+Steak Frites
+Steak 300
+Potatoes 200
+Sunflower_oil 50
+Salt 5
+
+Pasta Arrabbiata
+Pasta 200
+Tomatoes 100
+Garlic 10
+Chili_Flakes 5
+Sunflower_oil 20
+Salt 5
+
+Beef Burritos
+Beef 300
+Tortilla 2
+Rice 100
+Beans 100
+Cheese 50
+Salt 5
+
+Chicken Tikka Masala
+Chicken 300
+Tomatoes 100
+Cream 100
+Onions 50
+Garlic 10
+Salt 5
+
+Tomato Mozzarella Panini
+Tomatoes 100
+Mozzarella 100
+Bread 2
+Basil 10
+Sunflower_oil 20
+Salt 5
+
+Chili Con Carne
+Beef 300
+Beans 200
+Tomatoes 100
+Onions 50
+Garlic 10
+Salt 5
+
+Fried Chicken with Mashed Potatoes
+Chicken 300
+Potatoes 200
+Flour 50
+Sunflower_oil 100
+Salt 5
+
+Grilled Tuna Steak
+Tuna 300
+Sunflower_oil 20
+Salt 5
+Pepper 2
+
+Ceviche
+Fish 200
+Lime_Juice 50
+Onions 50
+Cilantro 10
+Salt 5
+
+Water
+Water 500
+
+Iced Tea
+Tea_Bags 2
+Sugar 20
+Lemon 1
+Water 500
+
+Hot Tea
+Tea_Bags 1
+Water 250
+
+Coffee
+Coffee_Beans 20
+Water 250
+
+Espresso
+Coffee_Beans 20
+Water 50
+
+Cappuccino
+Coffee_Beans 20
+Milk 100
+Water 50
+
+Latte
+Coffee_Beans 20
+Milk 150
+Water 50
+
+Hot Chocolate
+Cocoa_Powder 20
+Milk 200
+Sugar 20
+
+Red Wine
+Red_Wine 250
+
+White Wine
+White_Wine 250
+
+Beer
+Beer 500
+
+Craft Beer
+Craft_Beer 500
+
+Cider
+Cider 500
+
+Gin
+Gin 50
+Tonic_Water 200
+
+Vodka
+Vodka 50
+Soda_Water 200
+
+Rum
+Rum 50
+Cola 200
+
+Tequila
+Tequila 50
+Lime_Juice 20
+Salt 5
+
+Whiskey
+Whiskey 50
+Water 50

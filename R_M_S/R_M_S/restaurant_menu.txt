@@ -1,0 +1,78 @@
+Shopska Salad
+Tarator
+Chicken Soup
+Pork Schnitzel
+Beef Stew
+Grilled Chicken Breast
+Vegetable Stir-fry
+Moussaka
+Chicken Parmesan
+Stuffed Bell Peppers
+Fried Rice with Vegetables
+Beef and Broccoli Stir-fry
+Chicken Shawarma
+Grilled Salmon with Asparagus
+Fish and Chips
+Tomato Basil Soup
+Quinoa Salad
+Eggplant Parmesan
+Crispy Chicken Sandwich
+Pasta with Pesto Sauce
+Grilled Cheese Sandwich
+Lamb Curry
+Chicken Wings with Blue Cheese Dip
+Pasta Puttanesca
+Vegetarian Burger
+Roast Chicken with Potatoes
+Caprese Salad
+Pulled Pork Sandwich
+Cheese Quesadilla
+Pulled Beef Tacos
+Chicken and Rice
+Cheeseburger with Onion Rings
+Pasta with Clams
+Beef Empanadas
+Vegetable Soup
+Grilled Pork Tenderloin
+Pork Belly with Sauerkraut
+Sweet and Sour Pork
+Chicken Caesar Wrap
+Mushroom Risotto
+Barbecue Chicken Pizza
+Lobster Bisque
+Steak Salad
+Sushi Platter
+Peking Duck
+Lobster Roll
+Gyro with Tzatziki Sauce
+Pork Schnitzel
+Fried Calamari
+Fettuccine Carbonara
+Beef Wellington
+Steak Frites
+Pasta Arrabbiata
+Beef Burritos
+Chicken Tikka Masala
+Tomato Mozzarella Panini
+Chili Con Carne
+Fried Chicken with Mashed Potatoes
+Grilled Tuna Steak
+Ceviche
+Water
+Iced Tea
+Hot Tea
+Coffee
+Espresso
+Cappuccino
+Latte
+Hot Chocolate
+Red Wine
+White Wine
+Beer
+Craft Beer
+Cider
+Gin
+Vodka
+Rum
+Tequila
+Whiskey

@@ -1,0 +1,77 @@
+Shopska Salad 35
+Tarator 42
+Chicken Soup 28
+Pork Schnitzel 17
+Beef Stew 12
+Grilled Chicken Breast 25
+Vegetable Stir-fry 38
+Moussaka 22
+Chicken Parmesan 19
+Stuffed Bell Peppers 30
+Fried Rice with Vegetables 40
+Beef and Broccoli Stir-fry 16
+Chicken Shawarma 24
+Grilled Salmon with Asparagus 14
+Fish and Chips 18
+Tomato Basil Soup 45
+Quinoa Salad 33
+Eggplant Parmesan 20
+Crispy Chicken Sandwich 27
+Pasta with Pesto Sauce 31
+Grilled Cheese Sandwich 50
+Lamb Curry 11
+Chicken Wings with Blue Cheese Dip 26
+Pasta Puttanesca 21
+Vegetarian Burger 29
+Roast Chicken with Potatoes 15
+Caprese Salad 38
+Pulled Pork Sandwich 19
+Cheese Quesadilla 41
+Pulled Beef Tacos 25
+Chicken and Rice 34
+Cheeseburger with Onion Rings 17
+Pasta with Clams 13
+Beef Empanadas 36
+Vegetable Soup 48
+Grilled Pork Tenderloin 10
+Pork Belly with Sauerkraut 8
+Sweet and Sour Pork 22
+Chicken Caesar Wrap 27
+Mushroom Risotto 15
+Barbecue Chicken Pizza 9
+Lobster Bisque 23
+Steak Salad 18
+Sushi Platter 7
+Peking Duck 6
+Lobster Roll 8
+Gyro with Tzatziki Sauce 32
+Fried Calamari 30
+Fettuccine Carbonara 14
+Beef Wellington 5
+Steak Frites 9
+Pasta Arrabbiata 28
+Beef Burritos 32
+Chicken Tikka Masala 12
+Tomato Mozzarella Panini 20
+Chili Con Carne 19
+Fried Chicken with Mashed Potatoes 17
+Grilled Tuna Steak 13
+Ceviche 11
+Water 200
+Iced Tea 150
+Hot Tea 180
+Coffee 135
+Espresso 120
+Cappuccino 100
+Latte 130
+Hot Chocolate 90
+Red Wine 45
+White Wine 50
+Beer 80
+Craft Beer 60
+Cider 70
+Gin 40
+Vodka 55
+Rum 50
+Tequila 30
+Whiskey 35
