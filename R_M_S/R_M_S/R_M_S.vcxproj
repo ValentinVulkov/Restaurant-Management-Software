@@ -131,7 +131,7 @@
     <ClCompile Include="strUtils.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="checkRole.h" />
+    <ClInclude Include="roleFunctions.h" />
     <ClInclude Include="strUtils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

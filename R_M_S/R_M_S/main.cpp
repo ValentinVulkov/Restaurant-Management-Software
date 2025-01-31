@@ -12,18 +12,16 @@ Winter semester 2023/2024
 */
 
 
-
-
 #include <iostream>
 #include <fstream>
-#include "checkRole.h"
+#include "roleFunctions.h"
 
 int main()
 {
 	int role = checkRole();
 	if (role == 1)
 	{
-		serverOptions();
+		waiterOptions();
 	}
 	else if (role == 2)
 	{
